@@ -1,6 +1,6 @@
 import Head from 'next/head';
 import Layout, { siteTitle } from '@/components/Layout';
-import utilStyles from  '../../styles/Utils.module.css';
+import utilStyle from '../../styles/Utils.module.css';
 
 
 export default function contacto() {
