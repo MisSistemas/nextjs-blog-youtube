@@ -43,7 +43,7 @@ export default function Layout({ children, title, description,  home }) {
           </>
         ) : (
           <>
-            <Link href="/">
+            <Link href="/" legacyBehavior>
               <Image
                 priority
                 src="/img/user_photo.png"
@@ -54,7 +54,7 @@ export default function Layout({ children, title, description,  home }) {
               />
             </Link>
             <h2 className={utilStyles.headingLg}>
-              <Link href="/" className={utilStyles.colorInherit}>
+              <Link href="/" className={utilStyles.colorInherit} legacyBehavior>
                 {name}
               </Link>
             </h2>
@@ -63,16 +63,20 @@ export default function Layout({ children, title, description,  home }) {
       </header>
       <nav>
           <Link href="/">
-            <a>Inicio |</a>
+            Inicio |
           </Link>  
           <Link href="/blog">
-              <a>Blog |</a>
+              Blog |
+
           </Link>
           <Link href="/contacto">
-              <a>Contacto </a>
+              Contacto |
+          </Link>
+          <Link href="/cat">
+              Cats |
           </Link>
           <Link href="/about">
-            <a>About</a>
+            About
           </Link>
       </nav>  
 
