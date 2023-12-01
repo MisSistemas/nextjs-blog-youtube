@@ -1,33 +1,33 @@
-import Layout from "@/components/Layout"
-import type { InferGetServerSidePropsType, GetServerSideProps } from 'next'
+import Layout from '../../components/Layout'
+import Link from 'next/link'
 
-export default function index(repo) {
+export default function index({ data }) {
   return (
-    <Layout
-      title="Cats.. | Next.js"
-       description="Listado de Gatos."
-       home={false}
-    >
-        <h1>List of Cats</h1>
+    <Layout>
+        <h1>Lista de Gatos</h1>
+        { data.map(({ id, name, age, breed, deletedAt }) => (
+            <div key={id}>
+                <h3>
+                    <Link legacyBehavior href={`/blog/${id}`}>
+                        <a>{id} - {name} - {age} - {breed} - {deletedAt} </a>
+                    </Link>
+                </h3>
+            </div>
+        ))}
     </Layout>
   )
 }
- 
-type Repo = {
-  name: string
-  stargazers_count: number
-}
- 
-export const getServerSideProps = (async (context) => {
-  const res = await fetch('http://localhost:3001/api/v1/cats')
-  const repo = await res.json()
-  return { props: { repo } }
-}) satisfies GetServerSideProps<{
-  repo: Repo
-}>
- 
-export default function Page({
-  repo,
-}: InferGetServerSidePropsType<typeof getServerSideProps>) {
-  return repo.stargazers_count
+
+export async function getStaticProps() {
+    try {
+        const res =  await fetch('http://localhost:3001/api/v1/cats/')
+        const data = await res.json()
+        return {
+            props: {
+                data
+            }
+        }
+    } catch (error) {
+        console.log(error)
+    }
 }
